@@ -66,7 +66,7 @@ function EditarTarea({idTask, title, description}) {
             Cerrar
           </button>
 
-          <button className="d-none d-md-inline appointment-btn scrollto btn btn-outline-warning" onClick={() => {enviarDatos(idTask);handleClose();dispatchReload({type : "[Reload]", reload})}}>
+          <button className="d-none d-md-inline appointment-btn scrollto btn btn-outline-warning" onClick={async () => { await enviarDatos(idTask);handleClose();dispatchReload({type : "[Reload]", reload})}}>
             Ingresar
           </button>
         </Modal.Footer>
