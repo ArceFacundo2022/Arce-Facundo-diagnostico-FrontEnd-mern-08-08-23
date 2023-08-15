@@ -1,20 +1,33 @@
 //import CardFetch from '../components/CardFetch'
-import { useState } from 'react'
+import { useReducer } from 'react'
 import '../style.css'
+import ListTasks from '../components/ListTasks'
+import CargarTarea from '../components/CargarTarea'
+import { mainReducer } from '../reducers/mainReducer'
+import { mainContext } from '../contexts/mainContext'
 
 function Home() {
 
-  const [show, setShow] = useState(false)
+  const [reload, dispatchReload] = useReducer(mainReducer,{
+    reload : true
+  })
 
   return (
-    <div className='row'>
-      <button type='button' className='buttMostrar btn btn-outline-danger' hidden={show} onClick={() => {setShow(true)}}>Mostrar Cartas</button>
-      <div className="card" hidden={!show} style={{"background-color" : "black"}}>
-        <div className='row' id='cardFetch'>
-          { show }
+    <mainContext.Provider value={{
+      reload,dispatchReload
+    }
+    }>
+      <div className='row'>
+        <div className='container' style={{"marginTop":"250px"}}>
+          <button type='button' className='buttMostrar btn btn-outline-warning' onClick={() => {}}><CargarTarea/></button>
+        </div>
+        <div className="card" style={{"background-color" : "black", "alignItems" : 'center'}}>
+          <div className='row' id='cardFetch' style={{"textAlign" : 'center'}}>
+            <ListTasks/>
+          </div>
         </div>
       </div>
-    </div>
+    </mainContext.Provider>
   )
 }
 
